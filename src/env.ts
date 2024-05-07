@@ -15,4 +15,6 @@ export default {
     DB_PORT: Number(Bun.env.DB_PORT) || 3306,
     DB_SCHEMA: Bun.env.DB_SCHEMA as string,
     DATABASE_URL: Bun.env.DATABASE_URL,
+    JWT_PRIVATE_KEY: Bun.env.JWT_PRIVATE_KEY ?? "",
+    JWT_PUBLIC_KEY: Bun.env.JWT_PUBLIC_KEY ?? ""
 }

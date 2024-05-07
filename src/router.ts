@@ -1,23 +1,28 @@
 import { Elysia } from "elysia";
 import env from "./env";
+import { loginController } from "./APIs/login/controllers";
+// import jwt from './utils/jwt'
 
-const router = new Elysia();
+const router = new Elysia({ prefix: `${env.BASE_PATH}/v1` });
 
-router.group(`${env.BASE_PATH}/v1`, router => {
-    router.get("/refresh", () => {
-        return {
-            message: "Authorized"
-        };
-    });
-    router.post("/token", req => Buffer.from(JSON.stringify(req.body)).toString("base64"));
-    return router;
+router.get("/refresh", () => {
+    return {
+        message: "Authorized"
+    };
 });
 
-// const apiRouter = (router: Elysia) => {
-//     router.post("/refresh", req => {
-//         return req.body;
+router.post("/login", loginController);
+
+// router.use(jwt).post("/login", async (req) => {
+//     const token = await req.jwt.sign(req.body as any)
+//     req.cookie.auth.set({
+//         value: token,
+//         httpOnly: true,
+//         maxAge: 7 * 86400,
+//         path: '/profile',
 //     })
-//     return router
-// }
+
+//     return req.cookie.auth.value
+// });
 
 export default router;

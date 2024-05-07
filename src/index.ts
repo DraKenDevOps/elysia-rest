@@ -1,6 +1,7 @@
 import { Elysia } from "elysia";
 import ApiRouter from "./router";
 import env from "./env";
+// import jwt from './utils/jwt'
 
 const app = new Elysia();
 
@@ -11,22 +12,14 @@ app.get("/", () => ({
     instance: process.env.NODE_APP_INSTANCE || null
 }));
 
+// app.use(jwt)
 app.use(ApiRouter);
-// app.group("/api/v1", ApiRouter)
 
 app.listen({
     hostname: env.HOST,
     port: env.PORT,
     development: env.NODE_ENV == "development"
 });
-
-// @ts-ignore
-// console.log(app.server?.address)
-// console.log(app.server?.development)
-// @ts-ignore
-// console.log(app.server?.protocol)
-// console.log(app.server?.hostname)
-// console.log(app.server?.port)
 
 console.info(
     new Date() + " INFO -- REST API is running",
