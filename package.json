@@ -2,11 +2,13 @@
   "name": "elysia-rest",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "dayjs": "^1.11.11",
+    "elysia": "latest",
+    "mysql2": "^3.9.7"
   },
   "devDependencies": {
     "bun-types": "latest"
