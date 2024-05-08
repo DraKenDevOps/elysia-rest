@@ -41,14 +41,15 @@ export function verify(req: Context) {
     if (!token) return { status: "error", message: "No token provided." };
 
     try {
-        // const decoded = jwt.verify(token, env.JWT_PUBLIC_KEY, {
-        //     issuer,
-        //     subject,
-        //     audience,
-        //     maxAge: "24h",
-        //     algorithms: ["RS256"]
-        // }) as IJWTPayload
-        // req["tokenPayload"] = decoded
+        const decoded = jwt.verify(token, env.JWT_PUBLIC_KEY, {
+            issuer,
+            subject,
+            audience,
+            maxAge: "24h",
+            algorithms: ["RS256"]
+        }) as any
+        // @ts-ignore
+        req["tokenPayload"] = decoded
     } catch (e) {
         console.error("ERROR Verify Token --", e);
         return { status: "error", message: "Failed to authenticate token." };
